@@ -77,16 +77,16 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+  const router = useRouter();
+  
+  const { isLoaded, isSignedIn } = useAuth();
+  useEffect(() => {
+    if (!isLoaded && !isSignedIn) {
+      router.push('/(modals)/login')
+    }
+  }, [isLoaded])
+
   const HeaderLeftCloseButton = () => {
-    const router = useRouter();
-    const { isLoaded, isSignedIn } = useAuth();
-
-    useEffect(() => {
-      if (!isLoaded && !isSignedIn) {
-        router.push('/(modals)/login')
-      }
-    }, [isLoaded])
-
     return (
       <TouchableOpacity onPress={() => router.back()}>
         <MaterialCommunityIcons
