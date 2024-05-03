@@ -7,7 +7,7 @@ import { TouchableOpacity } from "react-native";
 import * as SecureStore from 'expo-secure-store'
 import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 
-const EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+const PUBLIC_CLERK_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
 
 const tokenCache = {
   async getToken(key: string) {
@@ -70,10 +70,10 @@ export default function RootLayout() {
   }
 
   return (
-    <ClerkProvider publishableKey={EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!} tokenCache={tokenCache}>
-      <RootLayoutNav />;
+    <ClerkProvider publishableKey={PUBLIC_CLERK_KEY!} tokenCache={tokenCache}>
+      <RootLayoutNav />
     </ClerkProvider>
-    )
+    );
 }
 
 function RootLayoutNav() {
