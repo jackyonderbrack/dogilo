@@ -3,6 +3,7 @@ import React from "react";
 import { useWarmUpBrowser } from "@/hooks/useWarmUpBrowser";
 import { defaultStyles } from "@/constants/Styles";
 import Colors from "@/constants/Colors";
+import { Ionicons } from "@expo/vector-icons";
 
 const login = () => {
   useWarmUpBrowser();
@@ -34,6 +35,40 @@ const login = () => {
           }}
         />
       </View>
+      <View style={{ gap: 20 }}>
+        <TouchableOpacity style={styles.btnOutline}>
+          <Ionicons
+            name="logo-google"
+            style={defaultStyles.btnIcon}
+            size={24}
+          />
+          <Text style={styles.btnOutlineText}>Zaloguj z Google</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btnOutline}>
+          <Ionicons
+            name="logo-apple"
+            style={defaultStyles.btnIcon}
+            size={24}
+          />
+          <Text style={styles.btnOutlineText}>Zaloguj z Apple</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btnOutline}>
+          <Ionicons
+            name="logo-facebook"
+            style={defaultStyles.btnIcon}
+            size={24}
+          />
+          <Text style={styles.btnOutlineText}>Zaloguj z Meta</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btnOutline}>
+          <Ionicons
+            name="call-outline"
+            style={defaultStyles.btnIcon}
+            size={24}
+          />
+          <Text style={styles.btnOutlineText}>Użyj numeru telefonu</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -55,5 +90,21 @@ const styles = StyleSheet.create({
   divider: {
     fontFamily: "lex-bold",
     color: Colors.grey,
+  },
+  btnOutline: {
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: Colors.grey,
+    height: 50,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    paddingHorizontal: 10,
+  },
+  btnOutlineText: {
+    color: "#000",
+    fontSize: 16,
+    fontFamily: "lex-bold",
   },
 });
