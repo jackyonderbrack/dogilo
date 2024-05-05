@@ -15,15 +15,15 @@ enum Strategy {
 const login = () => {
   useWarmUpBrowser();
   const router = useRouter();
-  const { startOAuthFlow: googleAuthentication } = useOAuth({ strategy: "oauth_google" });
-  const { startOAuthFlow: appleAuthentication } = useOAuth({ strategy: "oauth_apple" });
-  const { startOAuthFlow: facebookAuthentication } = useOAuth({ strategy: "oauth_facebook" });
+  const { startOAuthFlow: googleAuth } = useOAuth({ strategy: "oauth_google" });
+  const { startOAuthFlow: appleAuth } = useOAuth({ strategy: "oauth_apple" });
+  const { startOAuthFlow: facebookAuth } = useOAuth({ strategy: "oauth_facebook" });
 
   const onSelectAuthentication = async (strategy: Strategy) => {
     const selectedAuthentication = {
-      [Strategy.GOOGLE]: googleAuthentication,
-      [Strategy.APPLE]: appleAuthentication,
-      [Strategy.FACEBOOK]: facebookAuthentication,
+      [Strategy.GOOGLE]: googleAuth,
+      [Strategy.APPLE]: appleAuth,
+      [Strategy.FACEBOOK]: facebookAuth,
     }[strategy];
 
     try {
@@ -31,11 +31,12 @@ const login = () => {
       console.log("createdSessionId:", createdSessionId);
 
       if (createdSessionId) {
-        await setActive!({ session: createdSessionId });
-        router.back();
+        setActive!({ session: createdSessionId });
+        router.replace("/(tabs)/profile");
       }
     } catch (err) {
       console.error("Authentication error: ", err);
+      router.push("/(tabs)/profile");
     }
   };
 
