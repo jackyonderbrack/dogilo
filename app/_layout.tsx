@@ -4,34 +4,32 @@ import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { TouchableOpacity } from "react-native";
-import * as SecureStore from 'expo-secure-store'
+import * as SecureStore from "expo-secure-store";
 import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 
-const PUBLIC_CLERK_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
+const PUBLIC_CLERK_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 const tokenCache = {
   async getToken(key: string) {
     try {
-      return SecureStore.getItemAsync(key)
+      return SecureStore.getItemAsync(key);
     } catch (error) {
-      return null
+      return null;
     }
   },
   async saveToken(key: string, value: string) {
     try {
-      return SecureStore.setItemAsync(key, value)
+      return SecureStore.setItemAsync(key, value);
     } catch (error) {
-      return console.error('Wystąpił błąd podczas zapisywania wartości:', error);
+      return console.error("Wystąpił błąd podczas zapisywania wartości:", error);
     }
-  }
-}
+  },
+};
 
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
 } from "expo-router";
-
-
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
@@ -70,21 +68,23 @@ export default function RootLayout() {
   }
 
   return (
-    <ClerkProvider publishableKey={PUBLIC_CLERK_KEY!} tokenCache={tokenCache}>
+    <ClerkProvider
+      publishableKey={PUBLIC_CLERK_KEY!}
+      tokenCache={tokenCache}>
       <RootLayoutNav />
     </ClerkProvider>
-    );
+  );
 }
 
 function RootLayoutNav() {
   const router = useRouter();
-  
+
   const { isLoaded, isSignedIn } = useAuth();
   useEffect(() => {
     if (!isLoaded && !isSignedIn) {
-      router.push('/(modals)/login')
+      router.push("/(modals)/login");
     }
-  }, [isLoaded])
+  }, [isLoaded]);
 
   const HeaderLeftCloseButton = () => {
     return (
@@ -121,7 +121,7 @@ function RootLayoutNav() {
       <Stack.Screen
         name="(modals)/finder"
         options={{
-          headerTitle: "Wyszukiwanie", 
+          headerTitle: "Wyszukiwanie",
           presentation: "transparentModal",
           animation: "fade",
           headerLeft: () => <HeaderLeftCloseButton />,

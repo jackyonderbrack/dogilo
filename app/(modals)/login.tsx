@@ -3,7 +3,7 @@ import { useWarmUpBrowser } from "@/hooks/useWarmUpBrowser";
 import { defaultStyles } from "@/constants/Styles";
 import Colors from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
-import { useOAuth } from "@clerk/clerk-expo";
+import { useOAuth, signIn } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 
 enum Strategy {
@@ -32,7 +32,7 @@ const login = () => {
 
       if (createdSessionId) {
         setActive!({ session: createdSessionId });
-        router.replace("/(tabs)/profile");
+        // router.back();
       }
     } catch (err) {
       console.error("Authentication error: ", err);
